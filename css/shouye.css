@@ -1,0 +1,132 @@
+blockquote,body,dd,div,dl,dt,fieldset,form,
+h1,h2,h3,h4,h5,h6,html,li,map,ol,p,pre,table,td,th,ul {
+	margin: 0;
+	padding: 0;
+}
+
+dl,li,ol,ul {
+	list-style: none;
+}
+
+a {
+	text-decoration: none;
+	color: #666;
+}
+/*以下头部顶端样式*/
+.header_top {
+	width: 1200px;
+	height: 30px;
+	background: #f8f8f8;
+	margin: 0 auto;
+	font-size: 12px;
+	/*overflow: hidden;*/
+	
+}
+.top_list {
+	
+	float: right;
+	height: 100%;
+	position: relative;
+}
+.top_list>li {
+	height: 100%;
+	display: inline-block;
+	line-height: 30px;
+	
+}
+
+
+.top_list>li>a{
+	border-right: 1px #ccc dotted;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+.top_list>li:last-child a{
+	border: none;
+}
+
+.top_list .collect,.top_list .service_1{
+	width: 70px;
+	text-align: center;
+	position: absolute;
+	background: #f8f8f8;
+	display: none;
+	border: 1px #eee solid;
+	z-index: 99;
+}
+.iconfont {
+	font-size: 12px;
+	padding-right: 5px;
+}
+.top_list .shopcar{
+	color: hotpink;
+}
+/*   
+ 以下头部内容
+ * */
+.header_content {
+	width: 1200px;
+	height: 120px;
+	margin: 0 auto;
+	position: relative
+}
+#logo {
+	float: left;
+    width: 204px;
+    height: 52px;
+    background-size: 100%;
+    margin-top: 40px;
+}
+.search {
+	width: 520px;
+    position: absolute;
+    top: 21px;
+    left: 50%;
+    margin-left: -240px;
+    
+}
+#baobei {
+	display: block;
+    text-align: center;
+    width: 56px;
+    color: #fff;
+    line-height: 24px;
+    cursor: pointer;
+    background-color: #f36
+}
+.search-box {
+	height: 30px;
+    position: relative;
+}
+.search-txt {
+	float: left;
+    border: 2px solid #f36;
+    width: 437px;
+    line-height: 28px;
+    height: 28px;
+    margin: 0;
+    padding: 0 0 0 8px;
+}
+#search-btn {
+	float: left;
+    width: 70px;
+    height: 32px;
+    cursor: pointer;
+    background: #f36;
+    font-size: 20px;
+    text-align: center;
+    color: #fff;
+}
+.hotword {
+	padding-top: 12px;
+}
+.hotword a{
+	    padding-right: 10px;
+}
+.hotword a:nth-child(2n){
+	color: #f36
+}
+.spread {
+	display: block;
+	float: right;
+}
