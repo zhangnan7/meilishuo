@@ -25,6 +25,12 @@ input {
 	/*overflow: hidden;*/
 	
 }
+	.home {
+		float: left;
+		line-height: 30px;
+		color: #333333;
+		
+	}
 .top_list {
 	
 	float: right;

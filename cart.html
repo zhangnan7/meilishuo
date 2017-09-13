@@ -2,8 +2,10 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title></title>
+		<title>购物车</title>
 		<link rel="stylesheet" type="text/css" href="css/cart.css"/>
+		<link rel="stylesheet" type="text/css" href="download/font_4ooii04il01wcdi/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="iconfont/iconfont.css" />
 		<style>
 			.cart-wrap table tfoot{
 				display: table-header-group;
@@ -14,6 +16,7 @@
 		</style>
 	</head>
 	<body>
+		<div id="header-top"></div>
 		<div class="cart-wrap">
 			<table>
 				<thead>
@@ -58,12 +61,35 @@
 					</tr>
 				</tfoot>
 			</table>
+			
 		</div>
+		<div id="pc-footer"></div>
 	</body>
 </html>
 <script src="js/jquery-1.11.1.min.js"></script>
 <script src="js/cookie.js"></script>
 <script>
+	$("#header-top").load("public.html #header-top")
+	
+	$("#pc-footer").load("public.html #pc-footer")
+	
+	$(".top_list li").mouseover(function(){
+		$(this).children("a").css("color","#f36")
+		
+	}).eq(4).mouseover(function(){
+		$(".collect").css("display","block")
+	}).end().eq(9).mouseover(function(){
+		$(".service_1").css("display","block")
+	})
+	$(".top_list li").mouseout(function(){
+		$(this).children("a").css("color","")
+		
+	}).eq(4).mouseout(function(){
+		$(".collect").css("display","none")
+	}).end().eq(9).mouseout(function(){
+		$(".service_1").css("display","none")
+	})
+	
 	$(function(){
 		var arr = getCookie("shoplist");
 		var html = "";
@@ -87,23 +113,7 @@
 			
 			
 			
-			/*'<div class="shop-item clearfix">'+
-					'<p class="fl"><input type="checkbox" class="ck"/></p>'+
-					'<img class="fl" src="img/'+ shopinfo.src +'" alt="" />'+
-					'<p class="fl">'+ shopinfo.name +'</p>'+
-					'<span class="fl">'+ shopinfo.price +'元</span>'+
-					'<p class="fl count" '+
-						'data-id="'+ shopinfo.id +'" '+
-						'data-price="'+ shopinfo.price +'" data-count="'+ shopinfo.count +'"'+
-						'data-name="'+ shopinfo.name +'" data-src="'+ shopinfo.src +'"'+
-						'>'+
-						'<span class="updateCount" data-number="1">+</span>'+
-						'<span class="shop-count">'+ shopinfo.count +'</span>'+
-						'<span class="updateCount" data-number="-1">-</span>'+
-					'</p>'+
-					'<em class="fl sumPrice">'+ (shopinfo.count * shopinfo.price) +'元</em>'+
-					'<i class="fl delBtn">删除</i>'+
-				'</div>';*/
+			
 			
 		}
 		$(".list").html( html );

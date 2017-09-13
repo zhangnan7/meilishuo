@@ -20,7 +20,7 @@
 						<li><a href="#">收藏店铺</a></li>
 					</ul>
 				</li>
-				<li><a href="#"><i class="iconfont shopcar">&#xe63f;</i>我的购物车</a></li>
+				<li><a href="cart.html"><i class="iconfont shopcar">&#xe63f;</i>我的购物车</a></li>
 				<li><a href="#"><i class="iconfont">&#xe657;</i>我的订单</a></li>
 				<li><a href="#">帮助中心</a>
 					<ul class="service_1">
@@ -98,12 +98,23 @@
 					</div>
 				</div>
 				<div class="goods-info">
-					<h2>套装 秋季新款韩风简约纯色打底针织衫+毛呢背带裙两件套</h2>
+					<h2>套装秋季新款韩风简约纯色打底针织衫+毛呢背带裙两件套</h2>
 					<div class="price">
 						<p class="orig-price">价格:<span>¥ 95.00</span></p>
 						<p class="now-price">促销价:<span>¥85.50</span> <i>评价:0  累计销量:30</i> </p>
 					</div>
 					<p class="custom-service">客服: <span> <img src="img/contact-us.gif"/> 联系客服</span> </p>
+					<p class="goods-color">
+						颜色:
+						<img src="img/xiangqing002.jpg" />
+						<img src="img/xiangqing001.jpg" />
+					</p>
+					<p class="goods-size">
+						尺码:
+						<span>S</span>
+						<span>M</span>
+						<span>L</span>
+					</p>
 					<p class="goods-num"> 
 						<span>数量:</span>
 						<span class="clearfix">
@@ -115,7 +126,13 @@
 					</p>
 					<p class="buy-btn"> 
 					<span class="buynow">立刻购买</span>
+					<span data-src="img/xiangqing001.jpg" data-price="85.50" data-name="纯色打底针织衫+毛呢背带裙两件套"></span>
 					<span class="addcart">加入购物车</span>
+					<span class="cart-tip">
+						<span class="tip1"> <i class="iconfont">&#xe656;</i>已经将商品加入购物车</span>
+						<span class="tip2">去购物车查看</span>
+						<span class="tip-close">×</span>
+					</span>
 					</p>
 					<p class="promise">服务承诺 : &nbsp;退货补运费  全国包邮  7天无理由退换货</p>
 					<p class="promise">支付方式 : &nbsp;<i class="iconfont">&#xe685;</i><i class="iconfont">&#xe70f;</i><i class="iconfont">&#xe62d;</i></p>
@@ -137,11 +154,16 @@
 				<img src="img/xiangqing003.jpg" style="width: 740px;"/>
 			</div>
 		</div>
+		<div id="pc-footer"></div>
 	</body>
 </html>
 <script type="text/javascript" src="js/jquery-1.11.1.min.js">
 </script>
+<script src="js/cookie.js"></script>
 <script type="text/javascript">
+	$("#pc-footer").load("public.html #pc-footer")
+	
+	
 	$(".top_list li").mouseover(function(){
 		$(this).children("a").css("color","#f36")
 		
@@ -177,14 +199,24 @@ $(".main-title span").click(function(){
 
 })
 
-$(".shoplist").on("click","button",function(){
-		var arr = [];
+//选择商品属性
+$(".goods-color img").click(function(){
+	$(this).css("border","2px #666 solid")
+			.siblings().css("border","none")
+})
+$(".goods-size span").click(function(){
+	$(this).css("border","2px #666 solid")
+			.siblings().css("border","1px #ddd solid")
+})
+
+$(".addcart").click(function(){
+	
+	var arr = [];
 		var flag = true;//可以向数组中添加数据
 		var _json = {
-			id:$(this).prev().data("id"),
-			name:$(this).prev().data("name"),
-			src:$(this).prev().data("src"),
-			price:$(this).prev().data("price"),
+			name: $(this).prev().data("name"),
+			src: $(this).prev().data("src"),
+			price: $(this).prev().data("price"),
 			count:1
 		}
 		//当再次点击按钮时，cookie信息被覆盖  解决 ： 先取出cookie数据 存入到数组中，然后在把新增的商品存入到数组中
@@ -193,7 +225,7 @@ $(".shoplist").on("click","button",function(){
 			arr = cookieInfo;
 			//点击相同商品时，需要做商品数量的累加    用当前点击的商品编号id   和  取出来的cookie的 数据中商品id做比较 发现有相等的，count++
 			for(var i in arr){
-				if(_json.id == arr[i].id && _json.name == arr[i].name){
+				if(_json.name == arr[i].name){
 					arr[i].count++;
 					flag = false;
 					break;
@@ -206,10 +238,20 @@ $(".shoplist").on("click","button",function(){
 		}
 		
 		setCookie("shoplist",JSON.stringify(arr));
-		var f = confirm("是否继续购买?确定--继续购买，取消---去购物车结算");
-		if( !f ){
-			location.href = "shopcar.html";
-		}
+		
 		console.log( document.cookie );
+	
+	
+	
+	$(".cart-tip").css("display","block")
+	$(".tip2").click(function(){
+		location.href="cart.html";
+	})
+})
+$(".tip-close").click(function(){
+	$(".cart-tip").css("display","none")
+})
+$(".addcart").click(function(){
+		
 	})
 </script>

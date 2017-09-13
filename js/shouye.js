@@ -14,7 +14,7 @@ $(".top_list li").mouseover(function(){
 	}).end().eq(9).mouseout(function(){
 		$(".service_1").css("display","none")
 	})
-	
+	/*导航条吸顶效果*/
 	var oNav = document.getElementsByClassName("top_nav")[0];
 	window.onscroll = function(){
 		var h = 190;
@@ -42,7 +42,8 @@ $(".nav li").click(function(){
 	$(this).find("a").css({"color":"#f36","border-bottom":"2px solid #FF3366"}).end().siblings().find("a").css({"color":"#333","border":"none"})
 })
 
-
+//banner轮播
+	autoPlay()
     var timer = setInterval(autoPlay , 2000);
     
     var index = 0;
@@ -52,11 +53,17 @@ $(".nav li").click(function(){
      	if(index == 3){
      		index = 0;
      	}
-     	$(".banner-num span").eq(index-1).addClass("active").siblings().removeClass("active");
-     	$(".banner li").eq(index-1).animate({"left":0},1000,function(){
-     		$(this).css("z-index",0).siblings().css({"z-index":1,"left":1200})
-     	}) 	
+     	$(".banner-num span").eq(index).addClass("active").siblings().removeClass("active");
+     	$(".banner li").eq(index).fadeIn(1000).siblings().fadeOut(1000);
     }
+    $(".banner-num span").mouseover(function(){
+		clearInterval( timer );
+		index = $(this).index() - 1;
+		autoPlay();
+	})
+	$(".banner-num span").mouseout(function(){
+		timer = setInterval(autoPlay,2000);
+	})
     
 //ajax请求数据
 var deffered = $.ajax({
