@@ -15,9 +15,30 @@ $(".top_list li").mouseover(function(){
 		$(".service_1").css("display","none")
 	})
 	
+	var oNav = document.getElementsByClassName("top_nav")[0];
+	window.onscroll = function(){
+		var h = 190;
+		var sTop = document.body.scrollTop || document.documentElement.scrollTop ;//获取页面滚走的距离
+		if( sTop > h ){
+			oNav.style.position = "fixed";
+			oNav.style.top = "0";
+			oNav.style.width =" 100%" ;
+			oNav.style.background="#fff";
+			oNav.style.zIndex="999";
+			$(".go-top").css("display","block");
+			
+		}else{
+			oNav.style.position = "";
+			$(".go-top").css("display","none");
+			
+		}
+	}
+	$(".go-top").mousedown(function(){
+		$("body").animate({"scrollTop":0},500)
+	})
+
 //导航条点击效果
 $(".nav li").click(function(){
-	
 	$(this).find("a").css({"color":"#f36","border-bottom":"2px solid #FF3366"}).end().siblings().find("a").css({"color":"#333","border":"none"})
 })
 
@@ -93,4 +114,41 @@ var deffered = $.ajax({
 			})
 			
 	
+	})
+
+
+//购物车
+$(".addcart").click(function(){
+		var arr = [];
+		var flag = true;//可以向数组中添加数据
+		var _json = {
+			name: $(this).prev().data("name"),
+			src: $(this).prev().data("src"),
+			price: $(this).prev().data("price"),
+			count:1
+		}
+		//当再次点击按钮时，cookie信息被覆盖  解决 ： 先取出cookie数据 存入到数组中，然后在把新增的商品存入到数组中
+		var cookieInfo = getCookie("shoplist");
+		if( cookieInfo.length != 0 ){//表示cookie中有数据
+			arr = cookieInfo;
+			//点击相同商品时，需要做商品数量的累加    用当前点击的商品编号id   和  取出来的cookie的 数据中商品id做比较 发现有相等的，count++
+			for(var i in arr){
+				if(_json.name == arr[i].name){
+					arr[i].count++;
+					flag = false;
+					break;
+				}
+			}
+		}
+		
+		if(flag){
+			arr.push(_json);
+		}
+		
+		setCookie("shoplist",JSON.stringify(arr));
+		var f = confirm("是否继续购买?确定--继续购买，取消---去购物车结算");
+		if( !f ){
+			location.href = "cart.html";
+		}
+		console.log( document.cookie );
 	})
